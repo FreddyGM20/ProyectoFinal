@@ -8,11 +8,7 @@ if (isset($_POST['Iniciar'])) {
 	    $Contraseña = trim($_POST['Contraseña']);
         $query = $conn->query("SELECT * FROM users");
         $rownum = $query->num_rows;
-        if ($rownum == 0 || $rowsnum == false){
-            ?> 
-	        	<h3 class="bad">¡NOk, No existen registros en la base de datos!</h3>
-              <?php
-        }else{
+        if (!empty($query->num_rows) && $query->num_rows > 0){
             $prueba1 = mysqli_query($conn,"SELECT Usuario FROM users WHERE Usuario='$Usuario'");
             $prueba2 = mysqli_query($conn,"SELECT Contraseña FROM users WHERE Contraseña='$Contraseña'");
             $tempU=$Usuario;
@@ -46,6 +42,11 @@ if (isset($_POST['Iniciar'])) {
                 <h3 class="bad">¡NOk, El usuario ingresado no existe!</h3>
                 <?php
             }  
+
+        }else{
+            ?> 
+	        	<h3 class="bad">¡NOk, No existen registros en la base de datos!</h3>
+              <?php
         }
     } else {
 	        ?> 
