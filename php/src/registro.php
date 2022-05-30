@@ -23,7 +23,7 @@
 </style>
 </head>
 <body>
-    <form method="post">
+    <form method="post" action="registro.php">
     	<h1>Registrate</h1>
     	<input type="text" name="Usuario" placeholder="Usuario">
     	<input type="password" name="Contraseña" placeholder="Contraseña">

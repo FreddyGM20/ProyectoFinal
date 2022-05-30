@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <form method="post">
+    <form action="post.cgi" form method="post">
     	<h1>Inicia sesion</h1>
     	<input type="text" name="Usuario" placeholder="Usuario">
     	<input type="password" name="Contraseña" placeholder="Contraseña">

@@ -15,9 +15,9 @@ $bd = 'MYSQL_DATABASE';
 // check the MySQL connection status
 $conn = new mysqli($host, $user, $pass, $bd);
 if ($conn->connect_error) {
-    die("NOk!" . $conn->connect_error);
+    die("Base de datos: NOk!" . $conn->connect_error);
 } else {
-    echo "Ok!";
+    echo "Base de datos: Ok!";
 }
 
 ?>
