@@ -4,22 +4,22 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, 'http://localhost:8000/registro.php');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, "Usuario=x&Contraseña=2332&NRC=13213");
-
-$headers = array();
-$headers[] = 'Content-Type: application/x-www-form-urlencoded';
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+$post = array(
+    'Usuario' => 'FreddyGM',
+    'Contraseña' => '123456',
+    'NRC' => '1234'
+);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
 $result = curl_exec($ch);
 if (curl_errno($ch)) {
     echo 'Error:' . curl_error($ch);
 }
-curl_close($ch);
 $existe=0;
 include("connect.php");
-	    $Usuario = trim($headers[0]);
-	    $Contraseña = trim($headers[1]);
-	    $NRC = trim($headers[2]);
+	    $Usuario = trim($post[0]);
+	    $Contraseña = trim($post[1]);
+	    $NRC = trim($post[2]);
         $query = $conn->query("SELECT * FROM users");
         echo "Primera fase";
         if (!empty($query->num_rows) && $query->num_rows > 0){
@@ -73,4 +73,5 @@ include("connect.php");
                   echo "entra aqui error";
              } 
         }
+        curl_close($ch);
 ?>
