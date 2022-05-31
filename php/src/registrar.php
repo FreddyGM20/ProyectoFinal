@@ -5,11 +5,12 @@ curl_setopt($ch, CURLOPT_URL, 'http://localhost:8000/registro.php');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_POST, 1);
 $post = array(
-    $Usuario => 'FreddyGM',
-    $Contraseña => '123456',
-    $NRC => '1234'
+    'Usuario' => 'FreddyGM',
+    'Contraseña' => '123456',
+    'NRC' => '1234'
 );
 curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+
 
 $result = curl_exec($ch);
 if (curl_errno($ch)) {
@@ -17,9 +18,9 @@ if (curl_errno($ch)) {
 }
 $existe=0;
 include("connect.php");
-	    $Usuario = trim($Usuario);
-	    $Contraseña = trim($Contraseña);
-	    $NRC = trim($NRC);
+	    $Usuario = trim($result[0]);
+	    $Contraseña = trim($result[1]);
+	    $NRC = trim($result[2]);
         $query = $conn->query("SELECT * FROM users");
         echo "Primera fase";
         if (!empty($query->num_rows) && $query->num_rows > 0){
