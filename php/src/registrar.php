@@ -4,11 +4,6 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, 'http://localhost:8000/registro.php');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_POST, 1);
-$post = array(
-    'Usuario' => 'FreddyGM',
-    'Contraseña' => '123456',
-    'NRC' => '1234'
-);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
 $result = curl_exec($ch);
