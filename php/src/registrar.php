@@ -1,34 +1,54 @@
 <?php 
+$ch = curl_init();
+
+curl_setopt($ch, CURLOPT_URL, 'http://localhost:8000/registro.php');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, "Usuario=x&Contraseña=2332&NRC=13213");
+
+$headers = array();
+$headers[] = 'Content-Type: application/x-www-form-urlencoded';
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+$result = curl_exec($ch);
+if (curl_errno($ch)) {
+    echo 'Error:' . curl_error($ch);
+}
+curl_close($ch);
 $existe=0;
 include("connect.php");
-if (isset($_POST['Enviar'])) {
-    if (strlen($_POST['Usuario']) >= 1 && strlen($_POST['Contraseña']) >= 1 && strlen($_POST['NRC']) >= 1) {
-	    $Usuario = trim($_POST['Usuario']);
-	    $Contraseña = trim($_POST['Contraseña']);
-	    $NRC = trim($_POST['NRC']);
+	    $Usuario = trim($headers[0]);
+	    $Contraseña = trim($headers[1]);
+	    $NRC = trim($headers[2]);
         $query = $conn->query("SELECT * FROM users");
+        echo "Primera fase";
         if (!empty($query->num_rows) && $query->num_rows > 0){
             $prueba1 = mysqli_query($conn,"SELECT Usuario FROM users WHERE Usuario='$Usuario'");
             $tempU=$Usuario;
+            echo "Segunda fase";
             while($tempU = mysqli_fetch_array($prueba1)){
                 $existe++;
             }
             if ($existe == 0){
+                echo "Casi coronas";
                 $ingreso = "INSERT INTO users(Usuario, Contraseña, NRC) VALUES ('$Usuario','$Contraseña','$NRC')";
                 $resultado = mysqli_query($conn,$ingreso);
             if ($resultado) {
                 ?> 
                 <h3 class="ok">¡Ok, Te has inscrito correctamente!</h3>
             <?php
+            echo "Coronaste";
             } else {
                     ?> 
                     <h3 class="bad">¡NOk, ha ocurrido un error!</h3>
                 <?php
+                echo "F mi rey";
             }
             }else{
                  ?> 
                 <h3 class="bad">¡NOk, el usuario que quieres registrar ya existe!</h3>
                 <?php
+                echo "Revisa la base de datos cachon";
              }
             
         }else{
@@ -40,21 +60,17 @@ if (isset($_POST['Enviar'])) {
              $crear = mysqli_query($conn,$sql);
              $ingreso = "INSERT INTO users(Usuario, Contraseña, NRC) VALUES ('$Usuario','$Contraseña','$NRC')";
              $resultado = mysqli_query($conn,$ingreso);
+             echo "No habia na y se creo";
              if (!empty($resultado)) {
                  ?> 
                  <h3 class="ok">¡Ok, Te has inscrito correctamente!</h3>
                <?php
+               echo "inscrito";
              } else {
                      ?> 
                      <h3 class="bad">¡NOk, ha ocurrido un error!</h3>
                   <?php
-                  echo "entra aqui";
+                  echo "entra aqui error";
              } 
         }
-    } else {
-	        ?> 
-	    	<h3 class="bad">¡Por favor complete los campos!</h3>
-            <?php
-            }
-}
 ?>

@@ -23,12 +23,12 @@
 </style>
 </head>
 <body>
-    <form action ="http://localhost:8000/registro.php" form method="post">
+    <form action ="http://localhost:8000/registro.php" method="post">
     	<h1>Registrate</h1>
     	<input type="text" name="Usuario" placeholder="Usuario">
     	<input type="password" name="Contraseña" placeholder="Contraseña">
         <input type="text" name="NRC" placeholder="NRC">
-    	<input type="submit" name="Enviar">
+    	<input type="submit" value="Enviar">
 		<a href="/index.php">Regresar</a>
     </form>
         <?php 
